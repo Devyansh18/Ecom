@@ -1,4 +1,3 @@
-// import {View, Text, Switch} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -8,9 +7,7 @@ import OnBoarding from './src/screens/OnBoarding';
 import Signup from './src/screens/Signup';
 import Login from './src/screens/Login';
 import ForgotPassword from './src/screens/ForgotPassword';
-import Home from './src/screens/Home';
-import Favourite from './src/screens/Favourite';
-import ProductDetail from './src/screens/ProductDetail';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -33,8 +30,6 @@ const App = () => {
             options={{headerShown: false}}
           />
         ) : null}
-
-
 
         <Stack.Screen
           name="BottomTabNavigator"
@@ -64,14 +59,6 @@ const App = () => {
           options={{headerShown: false}}
         />
 
-<Stack.Screen
-          name="ProductDetail"
-          component={ProductDetail}
-          options={{headerShown: false}}
-        />
-
-
-  
       </Stack.Navigator>
     </NavigationContainer>
   );

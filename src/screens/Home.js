@@ -71,7 +71,9 @@ const Home = ({navigation}) => {
         <TouchableOpacity style={{position: 'absolute', right: 80, top: 30}}>
           <AntDesign name="search1" size={26} color={COLORS.gray1} />
         </TouchableOpacity>
-        <TouchableOpacity style={{position: 'absolute', right: 30, top: 30}}>
+        <TouchableOpacity
+          style={{position: 'absolute', right: 30, top: 30}}
+          onPress={() => navigation.navigate('Notification')}>
           <Ionicons name="notifications" size={26} color={COLORS.gray1} />
         </TouchableOpacity>
       </View>
@@ -95,7 +97,7 @@ const Home = ({navigation}) => {
           <FlatList
             data={product}
             numColumns={2}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.ProductListContainer}
             renderItem={({item}) => (
               <ProductItemCard

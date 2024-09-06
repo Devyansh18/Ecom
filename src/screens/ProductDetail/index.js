@@ -10,37 +10,24 @@ import React, {useState} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {COLORS, SIZES} from '../../Constants/theme';
 import Header from '../../Components/Header';
-
-
-
-const SizeData = [
-  {
-    id: 1,
-    Size: 'S',
-  },
-  {
-    id: 2,
-    Size: 'M',
-  },
-  {
-    id: 3,
-    Size: 'L',
-  },
-  {
-    id: 4,
-    Size: 'XL',
-  },
-  {
-    id: 5,
-    Size: 'XXL',
-  },
-];
+import {SizeData} from '../../Constants/data';
 
 const ProductDetail = ({route, navigation}) => {
   const [showFullDescription, setshowFullDescription] = useState(false);
-  const [counter, setcounter] = useState(0)
+  const [count, setcount] = useState(0);
+  const [selectedSize, setSelectedSize] = useState('M');
   const descriptionLimit = 75;
   const {product} = route.params;
+
+  const Sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+
+  const increment = () => {
+    setcount(prevCount => prevCount + 1);
+  };
+
+  const decrement = () => {
+    setcount(prevCount => prevCount - 1);
+  };
 
   const getDescriptionText = () => {
     if (showFullDescription) {
@@ -61,7 +48,6 @@ const ProductDetail = ({route, navigation}) => {
     navigation.goBack();
   };
 
-  // const {product} = route.params;
   return (
     <View style={styles.MainContainer}>
       <Header title={'Product Details'} onPress={navigateToBack} />
@@ -101,10 +87,22 @@ const ProductDetail = ({route, navigation}) => {
 
           <View
             style={{flexDirection: 'row', marginBottom: SIZES.height * 0.02}}>
-            {SizeData.map((item, index) => {
+            {Sizes.map(size => {
               return (
-                <TouchableOpacity style={styles.SizeView}>
-                  <Text style={{color: COLORS.gray30}}>{item.Size}</Text>
+                <TouchableOpacity
+                  key={size}
+                  style={[
+                    styles.SizeView,
+                    selectedSize === size && styles.selectedSize, // Blue border if selected
+                  ]}
+                  onPress={() => setSelectedSize(size)}>
+                  <Text
+                    style={[
+                      styles.sizeText,
+                      selectedSize === size && styles.selectedSizeText,
+                    ]}>
+                    {size}
+                  </Text>
                 </TouchableOpacity>
               );
             })}
@@ -112,7 +110,7 @@ const ProductDetail = ({route, navigation}) => {
 
           <Text style={styles.description}>Quantity</Text>
           <View style={styles.counterContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={decrement}>
               <AntDesign
                 name="minussquareo"
                 size={28}
@@ -120,25 +118,14 @@ const ProductDetail = ({route, navigation}) => {
               />
             </TouchableOpacity>
             <View style={styles.QuantityView}>
-              <Text style={{color: 'black', textAlign: 'center'}}>01</Text>
+              <Text style={{color: 'black', textAlign: 'center'}}>{count}</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={increment}>
               <AntDesign name="plussquare" size={28} color={COLORS.primary} />
             </TouchableOpacity>
           </View>
           <Text style={styles.description}>Description</Text>
 
-          {/* <Text
-              style={styles.productDescription}
-              // numberOfLines={showFullDescription ? undefined : 2}
-            >
-              {product.description.substring(0, 90)}...
-              <TouchableOpacity onPress={toggleDescription}>
-                <Text style={styles.readMoreText}>
-                  {showFullDescription ? 'Read Less' : 'Read More'}
-                </Text>
-              </TouchableOpacity>
-            </Text> */}
           <View>
             <Text style={styles.productDescription}>
               {getDescriptionText()}
@@ -160,6 +147,22 @@ const ProductDetail = ({route, navigation}) => {
           {/* </View> */}
         </View>
       </ScrollView>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.btn, styles.addToCart]}
+          // onPress={handleAddToCart}
+        >
+          <Text style={[styles.buttonText, styles.addtoCarttext]}>
+            Add to Cart
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.btn, styles.buyNowText]}
+          // onPress={handleBuyNow}
+        >
+          <Text style={styles.buttonText}>Buy Now</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -182,16 +185,13 @@ const styles = StyleSheet.create({
     width: '60%',
     height: '80%',
   },
-  price: { 
+  price: {
     color: COLORS.gray30,
-    // marginRight: SIZES.width * 0.11,
-
   },
   priceContainer: {
     width: '30%',
-    // backgroundColor: 'red',
     alignItems: 'center',
-    justifyContent : 'center'
+    justifyContent: 'center',
   },
   LikeButton: {
     backgroundColor: 'white',
@@ -221,8 +221,21 @@ const styles = StyleSheet.create({
     height: SIZES.height * 0.04,
     borderRadius: 10,
     marginHorizontal: SIZES.width * 0.02,
-    // borderColor: COLORS.lightGray10,
+    borderColor: COLORS.lightGray10,
     // borderWidth: 0.5,
+  },
+
+  selectedSize: {
+    borderColor: COLORS.primary,
+    borderWidth: 1.5,
+    borderCurve: 'circular',
+  },
+
+  sizeText: {
+    color: COLORS.gray30,
+  },
+  selectedSizeText: {
+    color: COLORS.primary,
   },
 
   detailsContainer: {
@@ -240,7 +253,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: COLORS.primary,
     marginBottom: SIZES.height * 0.01,
-    marginLeft : SIZES.width * 0.06
+    marginLeft: SIZES.width * 0.06,
   },
   ratingContainer: {
     flexDirection: 'row',
@@ -256,11 +269,6 @@ const styles = StyleSheet.create({
     color: COLORS.lightGray,
     fontSize: SIZES.width * 0.03,
   },
-  // productDescription: {
-  //   fontSize: SIZES.width * 0.032,
-  //   color: COLORS.gray30,
-  //   marginBottom: SIZES.height * 0.01,
-  // },
   description: {
     fontSize: SIZES.width * 0.035,
     color: COLORS.black,
@@ -275,23 +283,47 @@ const styles = StyleSheet.create({
     marginBottom: SIZES.height * 0.02,
     marginLeft: SIZES.width * 0.02,
   },
-  // readMoreText: {
-  //   color: COLORS.blue,
-  //   // marginTop: SIZES.height * 0.01,
-  //   lineHeight: SIZES.height * 0.025,
-  //   fontSize: SIZES.width * 0.03,
-  //   fontWeight: '600',
-  // },
-
   productDescription: {
     fontSize: SIZES.width * 0.035,
     color: COLORS.gray,
-    // lineHeight: SIZES.height * 0.025,
   },
   readMoreText: {
     color: COLORS.blue,
     fontSize: SIZES.width * 0.035,
     fontWeight: '600',
+  },
+  buttonContainer: {
+    marginTop: 20,
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 10,
+    paddingHorizontal: 20,
+  },
+
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    paddingTop: 10,
+  },
+
+  btn: {
+    borderRadius: 25,
+    borderCurve: 'circular',
+    width: 170,
+    height: 50,
+  },
+  addToCart: {
+    borderColor: '#1977f3',
+    borderWidth: 2,
+  },
+  addtoCarttext: {
+    color: '#1977f3',
+  },
+  buyNowText: {
+    backgroundColor: '#1977f3',
   },
 });
 

@@ -82,14 +82,11 @@ const ProductItemCard = ({itemName, price, rating, imageUrl,productId,   isFavor
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: 'red',
-    // marginHorizontal: 18,
-    // marginHorizontal : SIZES.width * 0.045,
+    backgroundColor: 'white',
     marginTop: 15,
-    width: '47%',
+    width: SIZES.width * 0.41,
     elevation: 4,
     borderRadius: 20,
-    // alignItems: 'center',
     paddingHorizontal: 10,
     paddingVertical: 10,
     marginBottom: 8,
@@ -97,7 +94,6 @@ const styles = StyleSheet.create({
     marginRight: SIZES.width * 0.03,
   },
   imageContainer: {
-    // backgroundColor: COLORS.lightGray10,
     backgroundColor: COLORS.white,
     height: SIZES.height * 0.13,
     borderRadius: 20,

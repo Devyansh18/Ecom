@@ -62,3 +62,93 @@ export const accesories = [
     price: '$15.00',
   },
 ];
+
+export const SizeData = [
+  {
+    id: 1,
+    Size: 'S',
+  },
+  {
+    id: 2,
+    Size: 'M',
+  },
+  {
+    id: 3,
+    Size: 'L',
+  },
+  {
+    id: 4,
+    Size: 'XL',
+  },
+  {
+    id: 5,
+    Size: 'XXL',
+  },
+];
+
+export const notifications = [
+  
+  {
+    id: '1',
+    icon: require('../assets/Icons/shoe.png'),
+    text: '50% OFF in Ultraboost all terrain Ltd shoes!!!',
+    time: 'Today',
+  },
+  {
+    id: '2',
+    icon: require('../assets/Icons/bag.png'),
+    text: 'One Step ahead with new stylish collections every week.',
+    time: 'Today',
+  },
+  {
+    id: '3',
+    icon: require('../assets/Icons/bag.png'),
+    text: 'Package from your order #67398 has been arrived.',
+    time: 'Earlier',
+  },
+  {
+    id: '4',
+    icon: require('../assets/Icons/shirt.png'),
+    text: '70% OFF in Cutter and Buck Women’s knit!!!',
+    time: 'Earlier',
+  },
+  {
+    id: '5',
+    icon: require('../assets/Icons/wallet.png'),
+    text: '$200 added in your wallet successfully.',
+    time: 'Earlier',
+  },
+  {
+    id: '6',
+    icon: require('../assets/Icons/wallet.png'),
+    text: 'Package from your order #34867 has been arrived.',
+    time: 'Earlier',
+  },
+  {
+    id: '7',
+    icon: require('../assets/Icons/bag.png'),
+    text: 'One Step ahead with new stylish collections every week.',
+    time: 'Earlier',
+  },
+  {
+    id: '8',
+    icon: require('../assets/Icons/shirt.png'),
+    text: '70% OFF in Cutter and Buck Women’s knit!!!',
+    time: 'Earlier',
+  },
+  {
+    id: '9',
+    icon: require('../assets/Icons/wallet.png'),
+    text: '$200 added in your wallet successfully.',
+    time: 'Earlier',
+  },
+  {
+    id: '10',
+    icon: require('../assets/Icons/wallet.png'),
+    text: 'Package from your order #34867 has been arrived.',
+    time: 'Earlier',
+  },
+
+];
+
+

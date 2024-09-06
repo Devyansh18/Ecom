@@ -11,10 +11,37 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {COLORS, SIZES} from '../Constants/theme';
-
-
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import ProductDetail from '../screens/ProductDetail';
+import Notification from '../screens/Notification';
 
 const Tab = createBottomTabNavigator();
+
+const Stack = createNativeStackNavigator()
+
+const HomeStack = () => {
+  return (
+    <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="ProductDetail"
+        component={ProductDetail}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="Notification"
+        component={Notification}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const BottomTabNavigator = () => {
   return (
@@ -27,7 +54,7 @@ const BottomTabNavigator = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarIcon: ({focused}) => (
             <Entypo
@@ -37,7 +64,6 @@ const BottomTabNavigator = () => {
             />
           ),
         }}
-        
       />
       <Tab.Screen
         name="Cart"
